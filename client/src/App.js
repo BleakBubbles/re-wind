@@ -6,6 +6,8 @@ import dvd from './assets/dvd.png'
 import dvd_open from './assets/dvd_open.png'
 import remote from './assets/remote.png'
 import laugh_track from './assets/laugh.mp3'
+import disk_drive from './assets/disk_drive.mp3'
+import useSound from 'use-sound';
 
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 const ffmpeg = createFFmpeg({ log: true });
@@ -14,6 +16,8 @@ function App() {
   const [ready, setReady] = useState(false);
   const [video, setVideo] = useState();
   const [audio, setAudio] = useState();
+
+  const [play] = useSound(disk_drive);
 
   const hiddenInput = useRef(null);
 
@@ -33,6 +37,15 @@ function App() {
     load();
   }, [])
 
+  const open = (e) => {
+    e.currentTarget.src=dvd_open;
+    play();
+  }
+
+  const close = (e) => {
+    e.currentTarget.src=dvd;
+    play();
+  }
 
   const upload = async (e) => {
     // Write the file to memory 
@@ -67,8 +80,8 @@ function App() {
 
       <button className='Upload' onClick={() => hiddenInput.current.click()}>
           <img
-            onMouseOver={(e) => e.currentTarget.src=dvd_open}
-            onMouseOut={(e) => e.currentTarget.src=dvd}
+            onMouseOver={(e) => open(e)}
+            onMouseOut={(e) => close(e)}
             src={dvd} alt="" border="0" width="73%"></img>
       </button>
 

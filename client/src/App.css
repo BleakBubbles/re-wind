@@ -7,19 +7,8 @@
   height: 100vh;
   background: url('./assets/tv.png') no-repeat center top;
   background-size: contain;
-  background-color: #ca52c9;
+  background-color: #a02d9e;
   overflow: clip;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -86,10 +75,11 @@
 
 .Tags {
   position: absolute;
+  left: 33%;
   z-index: 1;
   padding: 50px;
+  width: 127px;
   height: 10px;
-  width: 34%;
   cursor: pointer;
   user-drag: none;
   -webkit-user-drag: none;

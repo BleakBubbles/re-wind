@@ -73,17 +73,17 @@ def add_to_table(video_id, link, tag, ttt_dict):
 
 # demo
 
-video_id = "00000001"
-link = "lindsay.xie"
-tag = "happy"
-ttt_dict = {
-    5648: "bedge",
-    12359: "happyge",
-    15623: "sadge",
-    32472: "bedge",
-    46829: "cryge"
-}
+# video_id = "00000001"
+# link = "lindsay.xie"
+# tag = "happy"
+# ttt_dict = {
+#     5648: "bedge",
+#     12359: "happyge",
+#     15623: "sadge",
+#     32472: "bedge",
+#     46829: "cryge"
+# }
 
-connect_to_db()
-create_table()
-add_to_table(video_id, link, tag, ttt_dict)
+# connect_to_db()
+# create_table()
+# add_to_table(video_id, link, tag, ttt_dict)

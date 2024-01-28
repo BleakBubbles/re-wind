@@ -1,0 +1,102 @@
+.App {
+  position: absolute;
+  top:0;
+  left: 0;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background: url('./assets/tv.png') no-repeat center top;
+  background-size: contain;
+  background-color: #ca52c9;
+  overflow: clip;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Upload {
+  display: inline-block;
+  position: absolute;
+  width: 40%;
+  height: 24%;
+  top:77.8%;
+  left:26%;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.Upload img {
+  position: absolute;
+  top:0;
+  left:0;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.Remote {
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  height:50%;
+  width:376.71px;
+  position: absolute;
+}
+
+.Video {
+  position: absolute;
+  top:14%;
+  left:24.6%;
+}
+
+.Remote img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.Tags {
+  position: absolute;
+  z-index: 1;
+  padding: 50px;
+  height: 10px;
+  width: 34%;
+  cursor: pointer;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  border: none;
+  background-color: transparent;
+}

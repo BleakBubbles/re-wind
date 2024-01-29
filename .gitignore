@@ -1,1 +1,4 @@
 flask-backend/keys.json
+flask-backend/ffmpeg.exe
+flask-backend/audios/output.wav
+flask-backend/audios/test.mp4

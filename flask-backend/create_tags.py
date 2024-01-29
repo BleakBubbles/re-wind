@@ -16,7 +16,7 @@ def make_overall_tag():
             overall_tag = i
             max_conf = tags_dict[i]
 
-    #print(overall_tag)
+    print(overall_tag)
     return overall_tag
 
 def make_tt_dict():
@@ -25,7 +25,9 @@ def make_tt_dict():
     for i in tags_json:
         tags_list.append(i.prediction)
     timestamps_list = create_timestamps(transcribe_to_sentence(transcribed_json))
+    print(timestamps_list)
     tt_dict = dict(zip(timestamps_list, tags_list))
 
-    #print(tt_dict)
+    print("------------------ttdict")
+    print(tt_dict)
     return tt_dict

@@ -52,5 +52,6 @@ def classify_tags():
     inputs=inputs,
     examples=examples,
     )
-    #print(response)
+    print("CLASSIFY-------------------------------------------------------------\n\n\n\n\n\n")
+    print(response)
     return(response)

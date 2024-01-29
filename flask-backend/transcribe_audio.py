@@ -1,6 +1,7 @@
 import cohere
 import wave
 from google.cloud import speech
+import re 
 
 global transcribed_json 
 co = cohere.Client('UqQsutV6xDnfViXS2bt8SyhLyU7XennNBdiaP93t')
@@ -19,14 +20,14 @@ def transcribe_gcs(gcs_uri: str, FILE) -> str:
     with wave.open(FILE, "rb") as wave_file:
         sample_rate = wave_file.getframerate()
     
-    client = speech.SpeechClient.from_service_account_file('/Users/lindsayxie/Documents/API testing/keys.json')
+    client = speech.SpeechClient.from_service_account_file('./keys.json')
 
-    audio = speech.RecognitionAudio(uri="gs://rewind-audio-bucket/" + gcs_uri)
+    audio = speech.RecognitionAudio(uri="gs://rewind-audio-bucket2/" + gcs_uri)
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=sample_rate,
         language_code="en-US",
-        audio_channel_count=2,
+        audio_channel_count=1,
         enable_word_time_offsets=True,
         enable_word_confidence=True,
         enable_automatic_punctuation=True,
@@ -37,6 +38,7 @@ def transcribe_gcs(gcs_uri: str, FILE) -> str:
     print("Waiting for operation to complete...")
     response = operation.result(timeout=90)
 
+    print(response)
     return response
 
 # Corrects the list of transcription sentence made by google
@@ -55,7 +57,7 @@ def text_corrector(text: str):
     presence_penalty=0,
     stop_sequences=["--"],
     return_likelihoods='NONE')
-    #print('{}'.format(response.generations[0].text))
+    print('{}'.format(response.generations[0].text))
     return '{}'.format(response.generations[0].text)
 
 # Returns an array of the transcribed sentences
@@ -72,9 +74,10 @@ def transcribe_to_sentence(response):
 
     transcript = text_corrector(transcript)
 
-    #print(transcript.split(". ")[:-1])
-    #print(len(transcript.split(". ")[:-1]))
-    return transcript.split(". ")[:-1]
+    print(re.split('[?.!]', transcript)[:-1])
+    print(len(re.split('[?.!]', transcript)[:-1]))
+    return re.split('[?.!]', transcript)[:-1]
+
 
 # Returns an array of milliseconds of the the end of each sentence
 def create_timestamps(los):
@@ -83,16 +86,17 @@ def create_timestamps(los):
     # them to get the transcripts for the entire audio file.
     i = 0
     for words in transcribed_json.results[0].alternatives[0].words:
-        if i<len(los) and los[i].split(" ")[-1] in words.word:
+        if i<len(los) and los[i].split(" ")[-1] in words.word.replace("?", "."):
+            print(los[i].split(" ")[-1])
             i += 1
             sec = words.end_time.seconds
             micro = words.end_time.microseconds
             sentence_end_time.append(sec * 1000 + micro / 1000)
 
-    #print(sentence_end_time)
-    #print(len(sentence_end_time))
+    print(sentence_end_time)
+    print(len(sentence_end_time))
     return sentence_end_time
 
-transcribed_json = transcribe_gcs("20240127_144912.wav", "/Users/lindsayxie/Documents/API testing/20240127_144912.wav")
+transcribed_json = transcribe_gcs("./audios/output.wav", "./audios/output.wav")
 los = transcribe_to_sentence(transcribed_json)
 create_timestamps(los)
